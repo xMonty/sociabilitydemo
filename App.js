@@ -5,6 +5,10 @@ import { PROVIDER_GOOGLE } from 'react-native-maps';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import { Dimensions } from 'react-native';
 import VenueDetails from './src/components/VenueDetails';
+import Accessibility from './src/components/Accessibility';
+import Photos from './src/components/Photos';
+import Reviews from './src/components/Reviews';
+import TopImages from './src/components/TopImages';
 
 export default function App() {
   const [isPanelUp, setIsPanelUp] = useState(false);
@@ -40,12 +44,12 @@ export default function App() {
           onPress={handleMarkerPress}
         />
       </MapView>
-      { isPanelUp && <View style={styles.backgroundImage} height={220} />}
+      { isPanelUp && <TopImages onClose={()=>{ slidingUpPanelRef.current.hide(); setIsPanelUp(false); }} />}
       <SlidingUpPanel 
         ref={c => (slidingUpPanelRef.current = c)}
         draggableRange={{ top: panelTopAnchor, bottom: 0 }}
         snappingPoints={[panelTopAnchor, panelMidAnchor, 0]}
-        backdropOpacity={0}
+        showBackdrop={false}
         onDragStart={(value, gestureState) => {
           if (value < panelTopAnchor) {
             setIsPanelUp(false);
@@ -65,7 +69,12 @@ export default function App() {
               <View style={styles.dragBar}/>
             </View>
             <ScrollView>
-              <VenueDetails />
+              <View style={styles.scrollView}>
+                <VenueDetails />
+                <Accessibility />
+                <Photos />
+                <Reviews />
+              </View>
             </ScrollView>
           </View>
         )}
@@ -112,4 +121,7 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: 'red',
   },
+  scrollView: {
+    height: 1900,
+  }
 });
