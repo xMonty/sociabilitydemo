@@ -1,14 +1,15 @@
 import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import AddButton from "./AddButton";
+import { useSelector } from 'react-redux';
+
 const { width } = Dimensions.get('window');
 
 const Photos = () => {
-  const images = [
-    'https://www.w3schools.com/w3images/lights.jpg',
-    'https://www.w3schools.com/w3images/mountains.jpg',
-    'https://www.w3schools.com/w3images/nature.jpg',
-    'https://www.w3schools.com/w3images/snow.jpg',
-  ];
+  const selectedMarker = useSelector(state => state.markers.selectedMarker);
+  
+  if (!selectedMarker) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
@@ -17,7 +18,7 @@ const Photos = () => {
         <Text style={{ color: 'blue' }}>See all</Text>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {images.map((image, index) => (
+        {selectedMarker.images.map((image, index) => (
           <Image
             key={index}
             source={{ uri: image }}

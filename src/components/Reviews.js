@@ -1,8 +1,13 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import ReviewCard from "./ReviewCard";
 import AddButton from "./AddButton";
+import { useSelector } from 'react-redux';
 
 const Reviews = () => {
+  const selectedMarker = useSelector(state => state.markers.selectedMarker);
+  if (!selectedMarker) {
+    return null;
+  }
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -10,8 +15,11 @@ const Reviews = () => {
         <Text style={{ color: 'blue' }}>See all</Text>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <ReviewCard review={{}} />
-        <ReviewCard review={{}} />
+        {
+          selectedMarker.reviews.map((review, index) => (
+            <ReviewCard key={index} review={review} />
+          ))
+        }
       </ScrollView>
       <View style={{ width: 160 }}><AddButton text="Add Review" /></View>
     </View>

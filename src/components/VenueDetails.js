@@ -1,14 +1,20 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { AddButton, FavoriteButton, QRButton, ShareButton } from './Buttons';
-import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useSelector } from 'react-redux';
 
 const VenueDetails = () => {
+  const selectedMarker = useSelector(state => state.markers.selectedMarker);
+
+  if (!selectedMarker) {
+    return null;
+  }
+  
   return (
     <View style={styles.container}>
       <Text>Restaurant | 0.7 Miles away</Text>
-      <Text style={styles.name}>Cecconi's Pizza Bar</Text>
+      <Text style={styles.name}>{selectedMarker.name}</Text>
       <View style={styles.divider} />
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 6, paddingRight: 6, paddingTop: 10, paddingBottom: 10 }}>
         <ShareButton />
