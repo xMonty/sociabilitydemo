@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width,
-    height: 200,
+    height: 220,
   },
   closeButton: {
     position: 'absolute',
