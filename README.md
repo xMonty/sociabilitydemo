@@ -65,3 +65,8 @@ This will open a new window in your web browser with a QR code. Scan this QR cod
 1. Open the app and you'll see a map focused on London.
 2. Tap on the marker to bring up the Sliding Up Panel from the bottom.
 3. The panel contains more information about the marker.
+
+
+## Google Maps Key
+Add your google maps keys to 
+app.json under -> googleMapsApiKey
