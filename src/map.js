@@ -51,6 +51,8 @@ const MyMapView = (props) => {
   return (
     <View style={styles.container}>
       <MapView 
+        accessibilityLabel="Map showing markers"
+        accessibilityHint="Double-tap to interact with the map."
         style={styles.map} 
         provider={PROVIDER_GOOGLE}
         initialRegion={{
@@ -63,6 +65,8 @@ const MyMapView = (props) => {
         {
           markers && markers.map((marker, index) => (
             <Marker
+              accessibilityLabel="Marker for London, the capital of England."
+              accessibilityHint="Tap to view more information." 
               key={index}
               coordinate={{
                 latitude: marker.gps.latitude,
@@ -75,6 +79,8 @@ const MyMapView = (props) => {
       </MapView>
       { isPanelUp && <TopImages onClose={()=>{ slidingUpPanelRef.current.hide(); setIsPanelUp(false); }} />}
       <SlidingUpPanel 
+        accessibilityLabel="Information panel"
+        accessibilityHint="Slide up to view more information."
         ref={c => (slidingUpPanelRef.current = c)}
         draggableRange={{ top: panelTopAnchor, bottom: 0 }}
         snappingPoints={[panelTopAnchor, panelMidAnchor, 0]}
